@@ -10,3 +10,10 @@ Automatic plant care project
 
 ## Wymagania niefunkcjonalne
 * praca w środowisku domowym
+
+## Requirements
+
+### External library
+
+* composer require twbs/bootstrap:4.0.0-beta.2
+* composer require components/font-awesome
