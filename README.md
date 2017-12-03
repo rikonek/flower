@@ -14,6 +14,13 @@ Automatic plant care project
 * praca w środowisku domowym
 * Arduino/Raspberry Pi
 
+### Funkcjonalności rozwojowe
+* monitorowanie ilości zużywanej wody
+* monitorowanie poziomu wody w zbiorniku
+* podlewanie według wilgotności gleby, z uwzględnieniem czasowego harmonogramu i czujnika zmierzchowego
+* centralny interfejs webowy mogący obsługiwać kilka urządzeń
+* zmiana parametrów w centralnym interfejsie webowym wpływa na konkretne urządzenie
+
 ## Requirements
 
 ### External library
