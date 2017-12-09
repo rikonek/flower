@@ -10,6 +10,8 @@
 #define IN_WATER_LEVEL_100 12
 #define IN_SOIL_MOISTURE A0
 
+#define OUT_BUZZER 13
+
 #define DHTTYPE DHT22
 #define MAX_LOGS 36
 #define TIME_BETWEEN_READINGS 5000
@@ -41,6 +43,8 @@ void setup()
   pinMode(IN_WATER_LEVEL_50, INPUT_PULLUP);
   pinMode(IN_WATER_LEVEL_75, INPUT_PULLUP);
   pinMode(IN_WATER_LEVEL_100, INPUT_PULLUP);
+
+  pinMode(OUT_BUZZER, OUTPUT);
 
   Serial.begin(9600);
   Serial.println("System is running...");
