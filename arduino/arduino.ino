@@ -12,6 +12,7 @@
 
 #define DHTTYPE DHT22
 #define MAX_LOGS 36
+#define TIME_BETWEEN_READINGS 5000
 
 typedef enum soilMoistureStatus
 {
@@ -48,8 +49,14 @@ void setup()
 
 void loop()
 {
-  readings r={ getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
-  addLog(logs, r);
+  static unsigned long time_readings=0;
+
+  if(time_readings==0 || (millis()-time_readings)>=TIME_BETWEEN_READINGS)
+  {
+    readings r={ getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
+    addLog(logs, r);
+    time_readings=millis();
+  }
 
   readings current_log=readLog(logs, read_log_index);
 }
