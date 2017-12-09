@@ -11,6 +11,7 @@
 #define IN_SOIL_MOISTURE A0
 
 #define DHTTYPE DHT22
+#define MAX_LOGS 36
 
 typedef enum soilMoistureStatus
 {
@@ -18,7 +19,19 @@ typedef enum soilMoistureStatus
   humid
 } soilMoistureStatus;
 
+typedef struct readings
+{
+  uint8_t humidity;
+  float temperature;
+  uint8_t soil_moisture;
+  int8_t water_level;
+} readings;
+
 DHT dht(IN_DHT, DHTTYPE);
+readings logs[MAX_LOGS]={0};
+int log_index=0;
+int read_log_index=log_index;
+int user_log_index=log_index;
 
 void setup()
 {
@@ -35,4 +48,8 @@ void setup()
 
 void loop()
 {
+  readings r={ getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
+  addLog(logs, r);
+
+  readings current_log=readLog(logs, read_log_index);
 }
