@@ -63,4 +63,5 @@ void loop()
   }
 
   readings current_log=readLog(logs, read_log_index);
+  display(current_log);
 }
