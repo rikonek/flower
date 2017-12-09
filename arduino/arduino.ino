@@ -13,7 +13,7 @@
 #define OUT_BUZZER 13
 
 #define DHTTYPE DHT22
-#define MAX_LOGS 36
+#define MAX_LOGS 36 // int
 #define TIME_BETWEEN_READINGS 5000
 
 typedef enum soilMoistureStatus
@@ -32,9 +32,6 @@ typedef struct readings
 
 DHT dht(IN_DHT, DHTTYPE);
 readings logs[MAX_LOGS]={0};
-int log_index=0;
-int read_log_index=log_index;
-int user_log_index=log_index;
 
 void setup()
 {
@@ -54,14 +51,18 @@ void setup()
 void loop()
 {
   static unsigned long time_readings=0;
+  static int current_log_index=0;
 
   if(time_readings==0 || (millis()-time_readings)>=TIME_BETWEEN_READINGS)
   {
     readings r={ getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
-    addLog(logs, r);
+    current_log_index=addLog(logs, r);
     time_readings=millis();
   }
 
-  readings current_log=readLog(logs, read_log_index);
+  readings current_log=readLog(logs, current_log_index);
+
+  Serial.print(current_log_index);
+  Serial.print(" ");
   display(current_log);
 }
