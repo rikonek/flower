@@ -1,5 +1,7 @@
 void display(readings object)
 {
+  Serial.print(object.item_no);
+  Serial.print(". ");
   Serial.print(object.humidity);
   Serial.print("% ");
   Serial.print(object.temperature, 1);
