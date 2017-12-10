@@ -3,21 +3,23 @@
 #include <DHT_U.h>
 
 #define IN_DHT 2
-#define IN_BUTTON_DOWN 6
-#define IN_BUTTON_UP 7
-#define IN_WATER_LEVEL_0 8
-#define IN_WATER_LEVEL_25 9
-#define IN_WATER_LEVEL_50 10
-#define IN_WATER_LEVEL_75 11
-#define IN_WATER_LEVEL_100 12
+#define IN_BUTTON_DOWN 5
+#define IN_BUTTON_UP 6
+#define IN_WATER_LEVEL_0 7
+#define IN_WATER_LEVEL_25 8
+#define IN_WATER_LEVEL_50 9
+#define IN_WATER_LEVEL_75 10
+#define IN_WATER_LEVEL_100 11
 #define IN_SOIL_MOISTURE A0
 
+#define OUT_PUMP 12
 #define OUT_BUZZER 13
 
 #define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
 #define TIME_BETWEEN_READINGS 5000
 #define DISPLAY_RETURN_TIME 5000
+#define WATERING_DURATION 2000
 
 typedef enum soilMoistureStatus
 {
@@ -47,6 +49,7 @@ void setup()
   pinMode(IN_WATER_LEVEL_75, INPUT_PULLUP);
   pinMode(IN_WATER_LEVEL_100, INPUT_PULLUP);
 
+  pinMode(OUT_PUMP, OUTPUT);
   pinMode(OUT_BUZZER, OUTPUT);
 
   Serial.begin(9600);
@@ -58,11 +61,13 @@ void loop()
 {
   static unsigned long time_readings=0;
   static unsigned long time_display_delay=0;
+  static unsigned long time_watering=0;
   static int current_log_index=0;
   static int user_log_index=0;
   static uint8_t display_delay=0;
   static int readings_no;
   uint8_t button_pushed=0;
+  uint8_t is_dry=0;
 
   if(time_readings==0 || (millis()-time_readings)>=TIME_BETWEEN_READINGS)
   {
@@ -70,7 +75,25 @@ void loop()
     current_log_index=addLog(logs, r);
     time_readings=millis();
 
+    if(getSoilMoistureStatus()==dry)
+    {
+      is_dry=1;
+    }
+
     //  alarmOn() || alarmOff()
+  }
+
+  if(is_dry==1)
+  {
+    wateringOn();
+    if(time_watering==0 || (millis()-time_watering)>=WATERING_DURATION)
+    {
+      is_dry=0;
+    }
+  }
+  else
+  {
+    wateringOff();
   }
 
   if(display_delay==0)
