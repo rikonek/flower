@@ -59,9 +59,9 @@ void setup()
 
 void loop()
 {
-  static unsigned long time_readings=0;
-  static unsigned long time_display_delay=0;
-  static unsigned long time_watering=0;
+  static unsigned long timer_readings=0;
+  static unsigned long timer_display_delay=0;
+  static unsigned long timer_watering=0;
   static int current_log_index=0;
   static int user_log_index=0;
   static uint8_t display_delay=0;
@@ -69,11 +69,11 @@ void loop()
   uint8_t button_pushed=0;
   uint8_t is_dry=0;
 
-  if(time_readings==0 || (millis()-time_readings)>=TIME_BETWEEN_READINGS)
+  if(timer_readings==0 || (millis()-timer_readings)>=TIME_BETWEEN_READINGS)
   {
     readings r={ readings_no++, getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
     current_log_index=addLog(logs, r);
-    time_readings=millis();
+    timer_readings=millis();
 
     if(getSoilMoistureStatus()==dry)
     {
@@ -86,7 +86,7 @@ void loop()
   if(is_dry==1)
   {
     pumpOn();
-    if(time_watering==0 || (millis()-time_watering)>=WATERING_DURATION)
+    if(timer_watering==0 || (millis()-timer_watering)>=WATERING_DURATION)
     {
       is_dry=0;
     }
@@ -108,9 +108,9 @@ void loop()
 
     if(button_pushed==1)
     {
-      time_display_delay=millis();
+      timer_display_delay=millis();
     }
-    if(time_display_delay==0 || (millis()-time_display_delay)>=DISPLAY_RETURN_TIME)
+    if(timer_display_delay==0 || (millis()-timer_display_delay)>=DISPLAY_RETURN_TIME)
     {
       display_delay=0;
     }
