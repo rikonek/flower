@@ -85,7 +85,7 @@ void loop()
 
   if(is_dry==1)
   {
-    wateringOn();
+    pumpOn();
     if(time_watering==0 || (millis()-time_watering)>=WATERING_DURATION)
     {
       is_dry=0;
@@ -93,7 +93,7 @@ void loop()
   }
   else
   {
-    wateringOff();
+    pumpOff();
   }
 
   if(display_delay==0)
