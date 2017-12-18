@@ -83,18 +83,7 @@ void loop()
     //  alarmOn() || alarmOff()
   }
 
-  if(is_dry==1)
-  {
-    pumpOn();
-    if(timer_watering==0 || (millis()-timer_watering)>=WATERING_DURATION)
-    {
-      is_dry=0;
-    }
-  }
-  else
-  {
-    pumpOff();
-  }
+  is_dry=pump(is_dry, WATERING_DURATION);
 
   if(display_delay==0)
   {
