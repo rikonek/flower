@@ -1,21 +1,18 @@
-uint8_t pump(uint8_t is_dry, unsigned int watering_duration)
+void pump(unsigned int watering_duration, bool run_pump)
 {
   static unsigned long timer_watering=0;
-  uint8_t status=0;
 
-  if(is_dry==1)
+  if(run_pump==true)
   {
     pumpOn();
-    status=1;
+    timer_watering=millis();
   }
 
   if(timer_watering==0 || (millis()-timer_watering)>=watering_duration)
   {
     pumpOff();
-    status=0;
-    timer_watering=millis();
+    timer_watering=0;
   }
-  return status;
 }
 
 void pumpOn()
