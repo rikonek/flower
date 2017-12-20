@@ -1,3 +1,15 @@
+void soilMoistureOn()
+{
+  digitalWrite(OUT_SOIL_MOISTURE, HIGH);
+  delay(200);
+}
+
+void soilMoistureOff()
+{
+  digitalWrite(OUT_SOIL_MOISTURE, LOW);
+  delay(200);
+}
+
 int getSoilMoistureAnalog()
 {
   return 1024-analogRead(IN_SOIL_MOISTURE);
