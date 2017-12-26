@@ -2,6 +2,8 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
+#define IN_SOIL_MOISTURE A0
+
 #define IN_DHT 2
 #define IN_BUTTON_DOWN 4
 #define IN_BUTTON_UP 5
@@ -10,7 +12,6 @@
 #define IN_WATER_LEVEL_50 8
 #define IN_WATER_LEVEL_75 9
 #define IN_WATER_LEVEL_100 10
-#define IN_SOIL_MOISTURE A0
 
 #define OUT_SOIL_MOISTURE 11
 #define OUT_PUMP 12
@@ -21,6 +22,7 @@
 #define TIME_BETWEEN_READINGS 10000
 #define DISPLAY_RETURN_TIME 5000
 #define WATERING_DURATION 5000
+#define ALARM_DURATION 5000
 
 typedef enum soilMoistureStatus
 {
@@ -83,10 +85,15 @@ void loop()
     }
     soilMoistureOff();
 
+    if(r.water_level==0 || r.water_level==-1)
+    {
+      alarm(ALARM_DURATION, true);
+    }
     //  alarmOn() || alarmOff()
   }
 
   pump(WATERING_DURATION, false);
+  alarm(ALARM_DURATION, false);
 
   if(display_delay==0)
   {
