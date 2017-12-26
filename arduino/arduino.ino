@@ -4,6 +4,9 @@
 
 #define IN_SOIL_MOISTURE A0
 
+#define OUT_SDA A4
+#define OUT_SCL A5
+
 #define IN_DHT 2
 #define IN_BUTTON_DOWN 4
 #define IN_BUTTON_UP 5
