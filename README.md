@@ -1,4 +1,4 @@
-# Flower
+﻿# Flower
 Automatic plant care project
 
 ## Wymagania projektowe
@@ -12,18 +12,8 @@ Automatic plant care project
 
 ### Wymagania niefunkcjonalne
 * praca w środowisku domowym
-* Arduino/Raspberry Pi
+* Arduino
 
 ### Funkcjonalności rozwojowe
-* monitorowanie ilości zużywanej wody
 * monitorowanie poziomu wody w zbiorniku
-* podlewanie według wilgotności gleby, z uwzględnieniem czasowego harmonogramu i czujnika zmierzchowego
-* centralny interfejs webowy mogący obsługiwać kilka urządzeń
-* zmiana parametrów w centralnym interfejsie webowym wpływa na konkretne urządzenie
-
-## Requirements
-
-### External library
-
-* composer require twbs/bootstrap:4.0.0-beta.2
-* composer require components/font-awesome
+* podlewanie według wilgotności gleby, z uwzględnieniem czujnika zmierzchowego
