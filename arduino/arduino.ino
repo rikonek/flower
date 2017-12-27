@@ -1,6 +1,8 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h> //https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
 
 #define IN_SOIL_MOISTURE A0
 
@@ -44,6 +46,7 @@ typedef struct readings
 
 DHT dht(IN_DHT, DHTTYPE);
 readings logs[MAX_LOGS]={0};
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the 0x27 LCD I2C address
 
 void setup()
 {
@@ -62,6 +65,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("System is running...");
   dht.begin();
+  lcd.begin(16,2);   // LCD 16 chars 2 lines
 }
 
 void loop()
