@@ -63,10 +63,16 @@ void setup()
   pinMode(OUT_BUZZER, OUTPUT);
 
   Serial.begin(9600);
-  Serial.println("System is running...");
+  Serial.println("Flower project. Please wait...");
   dht.begin();
-  lcd.begin(16,2);   // LCD 16 chars 2 lines
+
+  lcd.begin(16,2); // LCD 16 chars 2 lines
   lcd.backlight();
+  lcd.clear();
+  lcd.setCursor(1,0);
+  lcd.print("Flower project");
+  lcd.setCursor(1,1);
+  lcd.print("Please wait...");
 }
 
 void loop()
