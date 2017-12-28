@@ -66,6 +66,7 @@ void setup()
   Serial.println("System is running...");
   dht.begin();
   lcd.begin(16,2);   // LCD 16 chars 2 lines
+  lcd.backlight();
 }
 
 void loop()
@@ -123,7 +124,5 @@ void loop()
     button_pushed=0;
   }
 
-  readings current_log=readLog(logs, user_log_index);
-
-  display(current_log);
+  display(readLog(logs, user_log_index));
 }
