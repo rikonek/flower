@@ -89,9 +89,11 @@ void loop()
   if(timer_readings==0 || (millis()-timer_readings)>=TIME_BETWEEN_READINGS)
   {
     soilMoistureOn();
-    readings r={ readings_no++, getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
+    readings r={ ++readings_no, getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
     current_log_index=addLog(logs, r);
     timer_readings=millis();
+
+    if(readings_no>999) readings_no=0; // I don't have more space in LCD
 
     if(getSoilMoistureStatus()==dry)
     {
@@ -114,6 +116,13 @@ void loop()
     user_log_index=current_log_index;
   }
 
+  static boolean logs_array_is_empty=1;
+  int tmp_user_log_index;
+  if(logs_array_is_empty==1)
+  {
+    tmp_user_log_index=user_log_index;
+  }
+
   button_pushed=readButton(user_log_index);
   if(button_pushed==1 || display_delay==1)
   {
@@ -128,6 +137,11 @@ void loop()
       display_delay=0;
     }
     button_pushed=0;
+  }
+
+  if(logs_array_is_empty==1 && user_log_index>=readings_no)
+  {
+    user_log_index=tmp_user_log_index;
   }
 
   display(readLog(logs, user_log_index));
