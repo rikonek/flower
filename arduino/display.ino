@@ -18,11 +18,21 @@ void display(readings object)
   lcd.print(object.humidity);
   lcd.print("% T:");
   lcd.print(object.temperature, 1);
-  lcd.setCursor(3,1);
+  lcd.setCursor(0,1);
+  lcd.print("W:");
+  if(object.water_level==-1)
+  {
+    lcd.print("error");
+  }
+  else
+  {
+    lcd.print(object.water_level);
+    lcd.print("%");
+  }
+  lcd.setCursor(9,1);
   lcd.print("SM:");
   lcd.print(object.soil_moisture);
-  lcd.print("% W:");
-  lcd.print(object.water_level);
+  lcd.print("%");
 
   Serial.print(object.item_no);
   Serial.print(". H:");
