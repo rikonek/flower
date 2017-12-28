@@ -5,6 +5,7 @@
 #include <LiquidCrystal_I2C.h> //https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
 
 #define IN_SOIL_MOISTURE A0
+#define IN_PHOTORESISTOR A1
 
 #define OUT_SDA A4
 #define OUT_SCL A5
