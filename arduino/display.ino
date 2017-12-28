@@ -2,6 +2,15 @@ void display(readings object)
 {
   static int old_item_no=0;
 
+  if(isDay()==true)
+  {
+    lcd.backlight();
+  }
+  else
+  {
+    lcd.noBacklight();
+  }
+
   if(old_item_no==object.item_no)
   {
     return;
