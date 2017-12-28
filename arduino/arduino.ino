@@ -77,7 +77,7 @@ void loop()
   static int current_log_index=0;
   static int user_log_index=0;
   static uint8_t display_delay=0;
-  static int readings_no;
+  static int readings_no=0;
   uint8_t button_pushed=0;
 
   if(timer_readings==0 || (millis()-timer_readings)>=TIME_BETWEEN_READINGS)
