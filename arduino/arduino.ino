@@ -63,6 +63,9 @@ void setup()
   pinMode(OUT_PUMP, OUTPUT);
   pinMode(OUT_BUZZER, OUTPUT);
 
+  pumpOff();
+  noWaterAlarmOff();
+
   Serial.begin(9600);
   Serial.println("Flower project. Please wait...");
   dht.begin();
