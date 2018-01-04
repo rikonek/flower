@@ -94,7 +94,7 @@ void loop()
     current_log_index=addLog(logs, r);
     timer_readings=millis();
 
-    if(readings_no>999) readings_no=0; // I don't have more space in LCD
+    if(readings_no>=999) readings_no=0; // I don't have more space in LCD
 
     if(getSoilMoistureStatus()==dry)
     {
