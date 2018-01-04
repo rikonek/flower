@@ -28,7 +28,7 @@
 #define TIME_BETWEEN_READINGS 6000
 #define DISPLAY_RETURN_TIME 5000
 #define WATERING_DURATION 5000
-#define ALARM_DURATION 5000
+#define NO_WATER_ALARM_DURATION 5000
 
 typedef enum soilMoistureStatus
 {
@@ -104,13 +104,13 @@ void loop()
 
     if(r.water_level==0 || r.water_level==-1)
     {
-      alarm(ALARM_DURATION, true);
+      noWaterAlarm(NO_WATER_ALARM_DURATION, true);
     }
     //  alarmOn() || alarmOff()
   }
 
   pump(WATERING_DURATION, false);
-  alarm(ALARM_DURATION, false);
+  noWaterAlarm(NO_WATER_ALARM_DURATION, false);
 
   if(display_delay==0)
   {

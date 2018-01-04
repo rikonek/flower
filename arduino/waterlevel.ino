@@ -23,3 +23,30 @@ int8_t getWaterLevel()
   }
   return water_level;
 }
+
+void noWaterAlarm(unsigned int alarm_duration, bool run_alarm)
+{
+  static unsigned long timer_alarm=0;
+
+  if(run_alarm==true)
+  {
+    noWaterAlarmOn();
+    timer_alarm=millis();
+  }
+
+  if(timer_alarm==0 || (millis()-timer_alarm)>=alarm_duration)
+  {
+    noWaterAlarmOff();
+    timer_alarm=0;
+  }
+}
+
+void noWaterAlarmOn()
+{
+  digitalWrite(OUT_BUZZER, HIGH);
+}
+
+void noWaterAlarmOff()
+{
+  digitalWrite(OUT_BUZZER, LOW);
+}
