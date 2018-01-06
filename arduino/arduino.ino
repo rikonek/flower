@@ -23,6 +23,8 @@
 #define OUT_PUMP 12
 #define OUT_BUZZER 13
 
+#define DEBUG 1
+
 #define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
 #define TIME_BETWEEN_READINGS 6000
@@ -66,8 +68,11 @@ void setup()
   pumpOff();
   noWaterAlarmOff();
 
-  Serial.begin(9600);
-  Serial.println("Flower project. Please wait...");
+  #if DEBUG
+    Serial.begin(9600);
+    Serial.println("Flower project. Please wait...");
+  #endif
+
   dht.begin();
 
   lcd.begin(16,2); // LCD 16 chars 2 lines

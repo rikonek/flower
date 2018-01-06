@@ -43,22 +43,24 @@ void display(readings object)
   lcd.print(object.soil_moisture);
   lcd.print("%");
 
-  Serial.print(object.item_no);
-  Serial.print(". H:");
-  Serial.print(object.humidity);
-  Serial.print("% T:");
-  Serial.print(object.temperature, 1);
-  Serial.print("*C SM:");
-  Serial.print(object.soil_moisture);
-  Serial.print("% W:");
-  if(object.water_level==-1)
-  {
-    Serial.print("error");
-  }
-  else
-  {
-    Serial.print(object.water_level);
-    Serial.print("%");
-  }
-  Serial.println();
+  #if DEBUG
+    Serial.print(object.item_no);
+    Serial.print(". H:");
+    Serial.print(object.humidity);
+    Serial.print("% T:");
+    Serial.print(object.temperature, 1);
+    Serial.print("*C SM:");
+    Serial.print(object.soil_moisture);
+    Serial.print("% W:");
+    if(object.water_level==-1)
+    {
+      Serial.print("error");
+    }
+    else
+    {
+      Serial.print(object.water_level);
+      Serial.print("%");
+    }
+    Serial.println();
+  #endif
 }
