@@ -51,6 +51,14 @@ void display(readings object)
   Serial.print("*C SM:");
   Serial.print(object.soil_moisture);
   Serial.print("% W:");
-  Serial.print(object.water_level);
+  if(object.water_level==-1)
+  {
+    Serial.print("error");
+  }
+  else
+  {
+    Serial.print(object.water_level);
+    Serial.print("%");
+  }
   Serial.println();
 }
