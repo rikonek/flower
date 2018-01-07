@@ -10,7 +10,7 @@
 #define OUT_SDA A4
 #define OUT_SCL A5
 
-#define IN_DHT 2
+#define IN_DHT 3
 #define IN_BUTTON_PLUS 4
 #define IN_BUTTON_MINUS 5
 #define IN_WATER_LEVEL_0 6
@@ -22,6 +22,8 @@
 #define OUT_SOIL_MOISTURE 11
 #define OUT_PUMP 12
 #define OUT_BUZZER 13
+#define OUT_LED_RED 16
+#define OUT_LED_GREEN 17
 
 #define DEBUG 1
 
@@ -65,9 +67,11 @@ void setup()
   pinMode(OUT_SOIL_MOISTURE, OUTPUT);
   pinMode(OUT_PUMP, OUTPUT);
   pinMode(OUT_BUZZER, OUTPUT);
+  pinMode(OUT_LED_RED, OUTPUT);
+  pinMode(OUT_LED_GREEN, OUTPUT);
 
   pumpOff();
-  noWaterAlarmOff();
+  noWaterAlarmBuzzerOff();
 
   #if DEBUG
     Serial.begin(9600);
@@ -113,13 +117,13 @@ void loop()
 
     if(r.water_level==0 || r.water_level==-1)
     {
-      noWaterAlarm(NO_WATER_ALARM_DURATION, true);
+      noWaterAlarmBuzzer(NO_WATER_ALARM_DURATION, true);
     }
-    //  alarmOn() || alarmOff()
   }
 
+  waterLevelLed();
+  noWaterAlarmBuzzer(NO_WATER_ALARM_DURATION, false);
   pump(WATERING_DURATION, false);
-  noWaterAlarm(NO_WATER_ALARM_DURATION, false);
   displayBacklight(false);
 
   if(display_delay==0)

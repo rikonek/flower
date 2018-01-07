@@ -24,29 +24,46 @@ int8_t getWaterLevel()
   return water_level;
 }
 
-void noWaterAlarm(unsigned int alarm_duration, bool run_alarm)
+void noWaterAlarmBuzzer(unsigned int alarm_duration, bool run_alarm)
 {
   static unsigned long timer_alarm=0;
 
   if(run_alarm==true)
   {
-    noWaterAlarmOn();
+    noWaterAlarmBuzzerOn();
     timer_alarm=millis();
   }
 
   if(timer_alarm==0 || (millis()-timer_alarm)>=alarm_duration)
   {
-    noWaterAlarmOff();
+    noWaterAlarmBuzzerOff();
     timer_alarm=0;
   }
 }
 
-void noWaterAlarmOn()
+void noWaterAlarmBuzzerOn()
 {
   digitalWrite(OUT_BUZZER, HIGH);
 }
 
-void noWaterAlarmOff()
+void noWaterAlarmBuzzerOff()
 {
   digitalWrite(OUT_BUZZER, LOW);
 }
+
+void waterLevelLed()
+{
+  int8_t water_level=getWaterLevel();
+
+  if(water_level==0 || water_level==-1)
+  {
+    digitalWrite(OUT_LED_RED, HIGH);
+    digitalWrite(OUT_LED_GREEN, LOW);
+  }
+  else
+  {
+    digitalWrite(OUT_LED_RED, LOW);
+    digitalWrite(OUT_LED_GREEN, HIGH);
+  }
+}
+
