@@ -27,10 +27,10 @@
 
 #define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
-#define TIME_BETWEEN_READINGS 6000
-#define DISPLAY_RETURN_TIME 5000
-#define WATERING_DURATION 5000
-#define NO_WATER_ALARM_DURATION 5000
+#define TIME_BETWEEN_READINGS 20000 // ms
+#define DISPLAY_RETURN_TIME 5000 // ms
+#define WATERING_DURATION 5000 // ms
+#define NO_WATER_ALARM_DURATION 5000 // ms
 
 typedef enum soilMoistureStatus
 {
