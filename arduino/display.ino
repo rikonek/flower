@@ -2,15 +2,6 @@ void display(readings object)
 {
   static int old_item_no=0;
 
-  if(isDay()==true)
-  {
-    lcd.backlight();
-  }
-  else
-  {
-    lcd.noBacklight();
-  }
-
   if(old_item_no==object.item_no)
   {
     return;
@@ -63,4 +54,27 @@ void display(readings object)
     }
     Serial.println();
   #endif
+}
+
+void displayBacklight(boolean on)
+{
+  static unsigned long timer_backlight=0;
+
+  if(on==true || isDay()==true)
+  {
+    lcd.backlight();
+    if(isDay()==false)
+    {
+      timer_backlight=millis();
+    }
+  }
+
+  if(timer_backlight==0 || (millis()-timer_backlight)>=DISPLAY_BACKLIGHT_TIME)
+  {
+    if(isDay()==false)
+    {
+      lcd.noBacklight();
+    }
+    timer_backlight=0;
+  }
 }

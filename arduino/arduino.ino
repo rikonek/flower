@@ -29,6 +29,7 @@
 #define MAX_LOGS 36 // int
 #define TIME_BETWEEN_READINGS 20000 // ms
 #define DISPLAY_RETURN_TIME 5000 // ms
+#define DISPLAY_BACKLIGHT_TIME 5000 // ms
 #define WATERING_DURATION 5000 // ms
 #define NO_WATER_ALARM_DURATION 5000 // ms
 
@@ -119,6 +120,7 @@ void loop()
 
   pump(WATERING_DURATION, false);
   noWaterAlarm(NO_WATER_ALARM_DURATION, false);
+  displayBacklight(false);
 
   if(display_delay==0)
   {
@@ -135,6 +137,8 @@ void loop()
   button_pushed=readButton(user_log_index);
   if(button_pushed==1 || display_delay==1)
   {
+    displayBacklight(true);
+
     display_delay=1;
 
     if(button_pushed==1)
