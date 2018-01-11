@@ -2,7 +2,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h> //https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
+#include <LiquidCrystal_I2C.h>
 
 #define IN_SOIL_MOISTURE A0
 #define IN_PHOTORESISTOR A1
