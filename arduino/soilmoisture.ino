@@ -28,8 +28,7 @@ soilMoistureStatus getSoilMoistureStatus()
   // humid: 300 < value < 700
   // water: value > 700
 
-  int soil_moisture=getSoilMoistureAnalog();
-  if(soil_moisture>=300)
+  if(getSoilMoistureAnalog()>=300)
   {
     return humid;
   }
