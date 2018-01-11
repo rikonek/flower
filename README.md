@@ -29,3 +29,6 @@ Automatic plant care project
 * 2x - resistor 10k ohm
 * 2x - push button
 * 1x - water level sensor
+
+## Links
+* https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
