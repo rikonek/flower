@@ -109,7 +109,7 @@ void loop()
 
     if(readings_no>=999) readings_no=0; // I don't have more space in LCD
 
-    if(getSoilMoistureStatus()==dry)
+    if(getSoilMoistureStatus()==dry && isDay()==true)
     {
       pump(WATERING_DURATION, true);
     }
