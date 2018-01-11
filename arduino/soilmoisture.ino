@@ -17,7 +17,10 @@ int getSoilMoistureAnalog()
 
 float getSoilMoisture()
 {
-  uint8_t soil_moisture=map((getSoilMoistureAnalog()),1,800,0,100); // max 870
+  // sensor in air: 153
+  // sensor in water: 650-870
+
+  uint8_t soil_moisture=map((getSoilMoistureAnalog()),150,850,0,100);
   if(soil_moisture>100) soil_moisture=100;
   return soil_moisture;
 }
