@@ -1,9 +1,9 @@
 boolean isDay()
 {
-  // night: 0 < value < 400
-  // day: value > 400
+  // night: 0 < value < 200
+  // day: value > 200
 
-  if(analogRead(IN_PHOTORESISTOR) >= 400)
+  if(analogRead(IN_PHOTORESISTOR) >= 200)
   {
     return true;
   }
