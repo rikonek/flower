@@ -11,25 +11,25 @@
 #define OUT_SCL A5
 
 #define IN_DHT 3
-#define IN_BUTTON_PLUS 4
-#define IN_BUTTON_MINUS 5
-#define IN_WATER_LEVEL_0 6
-#define IN_WATER_LEVEL_25 7
-#define IN_WATER_LEVEL_50 8
-#define IN_WATER_LEVEL_75 9
-#define IN_WATER_LEVEL_100 10
+#define IN_WATER_LEVEL_0 4
+#define IN_WATER_LEVEL_25 5
+#define IN_WATER_LEVEL_50 6
+#define IN_WATER_LEVEL_75 7
+#define IN_WATER_LEVEL_100 8
+#define IN_BUTTON_PLUS 16 // 16 = A2
+#define IN_BUTTON_MINUS 17 // 17 = A3
 
+#define OUT_LED_RED 9
+#define OUT_LED_GREEN 10
 #define OUT_SOIL_MOISTURE 11
 #define OUT_PUMP 12
 #define OUT_BUZZER 13
-#define OUT_LED_RED 16
-#define OUT_LED_GREEN 17
 
 #define DEBUG 1
 
 #define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
-#define TIME_BETWEEN_READINGS 300000 // ms
+#define TIME_BETWEEN_READINGS 10000 // ms
 #define DISPLAY_RETURN_TIME 5000 // ms
 #define DISPLAY_BACKLIGHT_TIME 5000 // ms
 #define WATERING_DURATION 5000 // ms
