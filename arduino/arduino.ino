@@ -25,15 +25,26 @@
 #define OUT_PUMP 12
 #define OUT_BUZZER 13
 
-#define DEBUG 1
-
-#define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
 #define TIME_BETWEEN_READINGS 10000 // ms
 #define DISPLAY_RETURN_TIME 5000 // ms
 #define DISPLAY_BACKLIGHT_TIME 5000 // ms
 #define WATERING_DURATION 5000 // ms
 #define NO_WATER_ALARM_DURATION 5000 // ms
+
+#define DEBUG 1
+
+#define DHTTYPE DHT22
+#define LCD_ADDR 0x27 // LCD I2C address
+#define LCD_EN 2
+#define LCD_RW 1
+#define LCD_RS 0
+#define LCD_D4 4
+#define LCD_D5 5
+#define LCD_D6 6
+#define LCD_D7 7
+#define LCD_BACKLIGHT_PIN 3
+#define LCD_BACKLIGHT_POL POSITIVE
 
 typedef enum soilMoistureStatus
 {
@@ -52,7 +63,7 @@ typedef struct readings
 
 DHT dht(IN_DHT, DHTTYPE);
 readings logs[MAX_LOGS]={0};
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the 0x27 LCD I2C address
+LiquidCrystal_I2C lcd(LCD_ADDR, LCD_EN, LCD_RW, LCD_RS, LCD_D4, LCD_D5, LCD_D6, LCD_D7, LCD_BACKLIGHT_PIN, LCD_BACKLIGHT_POL);
 
 void setup()
 {
