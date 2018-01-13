@@ -57,13 +57,27 @@ void waterLevelLed()
 
   if(water_level==0 || water_level==-1)
   {
-    digitalWrite(OUT_LED_RED, HIGH);
-    digitalWrite(OUT_LED_GREEN, LOW);
+    analogWrite(OUT_LED_GREEN, 0);
+    if(isDay()==true)
+    {
+      analogWrite(OUT_LED_RED, 255);
+    }
+    else
+    {
+      analogWrite(OUT_LED_RED, 1);
+    }
   }
   else
   {
-    digitalWrite(OUT_LED_RED, LOW);
-    digitalWrite(OUT_LED_GREEN, HIGH);
+    analogWrite(OUT_LED_RED, 0);
+    if(isDay()==true)
+    {
+      analogWrite(OUT_LED_GREEN, 255);
+    }
+    else
+    {
+      analogWrite(OUT_LED_GREEN, 1);
+    }
   }
 }
 
