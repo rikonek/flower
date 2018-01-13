@@ -1,17 +1,20 @@
 void display(readings object)
 {
   static int old_item_no=0;
+  static unsigned long timer_refresh=millis();
 
-  if(old_item_no==object.item_no)
+  if(old_item_no==object.item_no && (millis()-timer_refresh)<=60000) // 60 seconds
   {
     return;
   }
 
+  timer_refresh=millis();
+
   old_item_no=object.item_no;
 
   unsigned long time_ago=readingsTimeToTimeAgo(object.read_time);
-  unsigned long time_ago_h=time_ago >> sizeof(uint8_t)*8;
-  uint8_t time_ago_m=time_ago & 255;
+  unsigned long time_ago_h=time_ago >> sizeof(uint8_t)*8; // unpacking from long var
+  uint8_t time_ago_m=time_ago & 255; // unpacking from long var
 
   lcd.clear();
   lcd.setCursor(0,0);
@@ -105,6 +108,6 @@ unsigned long readingsTimeToTimeAgo(unsigned long time_ago)
   unsigned long minutes=(millis()-time_ago)/1000/60;
   unsigned long h=(minutes-(minutes%60))/60;
   uint8_t m=minutes-(h*60);
-  return (h << sizeof(uint8_t)*8) | m;
+  return (h << sizeof(uint8_t)*8) | m; // packing to one long var
 }
 
