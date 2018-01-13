@@ -9,29 +9,45 @@ void display(readings object)
 
   old_item_no=object.item_no;
 
+  unsigned long time_ago=readingsTimeToTimeAgo(object.read_time);
+  unsigned long time_ago_h=time_ago >> sizeof(uint8_t)*8;
+  uint8_t time_ago_m=time_ago & 255;
+
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print(object.item_no);
   lcd.print(".");
   lcd.setCursor(4,0);
-  lcd.print("H:");
-  lcd.print(object.humidity);
-  lcd.print("% T:");
+  lcd.print(time_ago_h);
+  lcd.print(":");
+  if(time_ago_m<10) lcd.print("0");
+  lcd.print(time_ago_m);
+  lcd.setCursor(10,0);
+  lcd.print("T:");
   lcd.print(object.temperature, 1);
   lcd.setCursor(0,1);
-  lcd.print("W:");
   if(object.water_level==-1)
   {
-    lcd.print("error");
+    lcd.print("Err");
   }
   else
   {
-    lcd.print(object.water_level);
-    lcd.print("%");
+    switch(object.water_level)
+    {
+      case 0: lcd.print("0/4"); break;
+      case 25: lcd.print("1/4"); break;
+      case 50: lcd.print("2/4"); break;
+      case 75: lcd.print("3/4"); break;
+      case 100: lcd.print("4/4"); break;
+    }
   }
-  lcd.setCursor(9,1);
-  lcd.print("SM:");
+  lcd.setCursor(4,1);
+  lcd.print("S:");
   lcd.print(object.soil_moisture);
+  lcd.print("%");
+  lcd.setCursor(10,1);
+  lcd.print("H:");
+  lcd.print(object.humidity);
   lcd.print("%");
 
   #if DEBUG
@@ -52,6 +68,11 @@ void display(readings object)
       Serial.print(object.water_level);
       Serial.print("%");
     }
+    Serial.print(" Time:");
+    Serial.print(time_ago_h);
+    Serial.print(":");
+    if(time_ago_m<10) Serial.print("0");
+    Serial.print(time_ago_m);
     Serial.println();
   #endif
 }
@@ -78,3 +99,12 @@ void displayBacklight(boolean on)
     timer_backlight=0;
   }
 }
+
+unsigned long readingsTimeToTimeAgo(unsigned long time_ago)
+{
+  unsigned long minutes=(millis()-time_ago)/1000/60;
+  unsigned long h=(minutes-(minutes%60))/60;
+  uint8_t m=minutes-(h*60);
+  return (h << sizeof(uint8_t)*8) | m;
+}
+

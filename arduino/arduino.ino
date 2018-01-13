@@ -55,6 +55,7 @@ typedef enum soilMoistureStatus
 typedef struct readings
 {
   int item_no;
+  unsigned long read_time;
   uint8_t humidity;
   float temperature;
   uint8_t soil_moisture;
@@ -114,7 +115,7 @@ void loop()
   if(timer_readings==0 || (millis()-timer_readings)>=TIME_BETWEEN_READINGS)
   {
     soilMoistureOn();
-    readings r={ ++readings_no, getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
+    readings r={ ++readings_no, millis(), getHumidity(), getTemperature(), getSoilMoisture(), getWaterLevel() };
     current_log_index=addLog(logs, r);
     timer_readings=millis();
 
