@@ -29,7 +29,7 @@
 
 #define DHTTYPE DHT22
 #define MAX_LOGS 36 // int
-#define TIME_BETWEEN_READINGS 20000 // ms
+#define TIME_BETWEEN_READINGS 300000 // ms
 #define DISPLAY_RETURN_TIME 5000 // ms
 #define DISPLAY_BACKLIGHT_TIME 5000 // ms
 #define WATERING_DURATION 5000 // ms
@@ -115,7 +115,7 @@ void loop()
     }
     soilMoistureOff();
 
-    if(r.water_level==0 || r.water_level==-1)
+    if((r.water_level==0 || r.water_level==-1) && isDay()==true)
     {
       noWaterAlarmBuzzer(NO_WATER_ALARM_DURATION, true);
     }
