@@ -31,6 +31,10 @@
 
 #define DEBUG 1
 
+#if DEBUG
+  #define TIME_BETWEEN_READINGS 5000 // ms
+#endif
+
 #define DHTTYPE DHT22
 #define LCD_ADDR 0x27 // LCD I2C address
 #define LCD_EN 2
