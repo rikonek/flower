@@ -43,29 +43,59 @@ void waterLevelLed()
 {
   uint8_t water_level=getWaterLevel();
 
-  if(water_level==0)
+  switch(water_level)
   {
-    analogWrite(OUT_LED_GREEN, 0);
-    if(isDay()==true)
-    {
-      analogWrite(OUT_LED_RED, 255);
-    }
-    else
-    {
-      analogWrite(OUT_LED_RED, 1);
-    }
-  }
-  else
-  {
-    analogWrite(OUT_LED_RED, 0);
-    if(isDay()==true)
-    {
-      analogWrite(OUT_LED_GREEN, 255);
-    }
-    else
-    {
-      analogWrite(OUT_LED_GREEN, 1);
-    }
+    case 2:
+      analogWrite(OUT_LED_RED, 0);
+      if(isDay()==true)
+      {
+        analogWrite(OUT_LED_GREEN, 255);
+      }
+      else
+      {
+        analogWrite(OUT_LED_GREEN, 1);
+      }
+      break;
+
+    case 1:
+      static unsigned long timer_blinking=millis();
+      static boolean led_blinking_on=false;
+
+      analogWrite(OUT_LED_RED, 0);
+      if((millis()-timer_blinking)>=1000) // 1 seconds
+      {
+        if(led_blinking_on==false)
+        {
+          led_blinking_on=true;
+          if(isDay()==true)
+          {
+            analogWrite(OUT_LED_GREEN, 255);
+          }
+          else
+          {
+            analogWrite(OUT_LED_GREEN, 1);
+          }
+        }
+        else
+        {
+          led_blinking_on=false;
+          analogWrite(OUT_LED_GREEN, 0);
+        }
+        timer_blinking=millis();
+      }
+      break;
+
+    case 0:
+    default:
+      analogWrite(OUT_LED_GREEN, 0);
+      if(isDay()==true)
+      {
+        analogWrite(OUT_LED_RED, 255);
+      }
+      else
+      {
+        analogWrite(OUT_LED_RED, 1);
+      }
   }
 }
 
