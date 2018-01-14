@@ -11,11 +11,8 @@
 #define OUT_SCL A5
 
 #define IN_DHT 3
-#define IN_WATER_LEVEL_0 4
-#define IN_WATER_LEVEL_25 5
-#define IN_WATER_LEVEL_50 6
-#define IN_WATER_LEVEL_75 7
-#define IN_WATER_LEVEL_100 8
+#define IN_WATER_LEVEL_EMPTY 7
+#define IN_WATER_LEVEL_LOW 8
 #define IN_BUTTON_PLUS 16 // 16 = A2
 #define IN_BUTTON_MINUS 17 // 17 = A3
 
@@ -59,7 +56,7 @@ typedef struct readings
   uint8_t humidity;
   float temperature;
   uint8_t soil_moisture;
-  int8_t water_level;
+  uint8_t water_level;
 } readings;
 
 DHT dht(IN_DHT, DHTTYPE);
@@ -70,11 +67,8 @@ void setup()
 {
   pinMode(IN_BUTTON_PLUS, INPUT_PULLUP);
   pinMode(IN_BUTTON_MINUS, INPUT_PULLUP);
-  pinMode(IN_WATER_LEVEL_0, INPUT_PULLUP);
-  pinMode(IN_WATER_LEVEL_25, INPUT_PULLUP);
-  pinMode(IN_WATER_LEVEL_50, INPUT_PULLUP);
-  pinMode(IN_WATER_LEVEL_75, INPUT_PULLUP);
-  pinMode(IN_WATER_LEVEL_100, INPUT_PULLUP);
+  pinMode(IN_WATER_LEVEL_EMPTY, INPUT_PULLUP);
+  pinMode(IN_WATER_LEVEL_LOW, INPUT_PULLUP);
 
   pinMode(OUT_SOIL_MOISTURE, OUTPUT);
   pinMode(OUT_PUMP, OUTPUT);
@@ -127,7 +121,7 @@ void loop()
     }
     soilMoistureOff();
 
-    if((r.water_level==0 || r.water_level==-1) && isDay()==true)
+    if(r.water_level==0 && isDay()==true)
     {
       noWaterAlarmBuzzer(NO_WATER_ALARM_DURATION, true);
     }

@@ -29,20 +29,11 @@ void display(readings object)
   lcd.print("T:");
   lcd.print(object.temperature, 1);
   lcd.setCursor(0,1);
-  if(object.water_level==-1)
+  switch(object.water_level)
   {
-    lcd.print("Err");
-  }
-  else
-  {
-    switch(object.water_level)
-    {
-      case 0: lcd.print("0/4"); break;
-      case 25: lcd.print("1/4"); break;
-      case 50: lcd.print("2/4"); break;
-      case 75: lcd.print("3/4"); break;
-      case 100: lcd.print("4/4"); break;
-    }
+    case 0: lcd.print("Emp"); break;
+    case 1: lcd.print("Low"); break;
+    case 2: lcd.print("OK"); break;
   }
   lcd.setCursor(4,1);
   lcd.print("S:");
@@ -62,14 +53,11 @@ void display(readings object)
     Serial.print("*C SM:");
     Serial.print(object.soil_moisture);
     Serial.print("% W:");
-    if(object.water_level==-1)
+    switch(object.water_level)
     {
-      Serial.print("error");
-    }
-    else
-    {
-      Serial.print(object.water_level);
-      Serial.print("%");
+      case 0: Serial.print("Empty"); break;
+      case 1: Serial.print("Low"); break;
+      case 2: Serial.print("OK"); break;
     }
     Serial.print(" Time:");
     Serial.print(time_ago_h);
