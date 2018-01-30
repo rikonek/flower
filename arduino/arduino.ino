@@ -119,13 +119,13 @@ void loop()
 
     if(readings_no>=999) readings_no=0; // I don't have more space in LCD
 
-    if(getSoilMoistureStatus()==dry && isDay()==true)
+    if(isDay()==true && getSoilMoistureStatus()==dry && getWaterLevel()>0)
     {
       pump(WATERING_DURATION, true);
     }
     soilMoistureOff();
 
-    if(r.water_level==0 && isDay()==true)
+    if(isDay()==true && getWaterLevel()==0)
     {
       noWaterAlarmBuzzer(NO_WATER_ALARM_DURATION, true);
     }
