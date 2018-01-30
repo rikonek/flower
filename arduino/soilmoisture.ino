@@ -15,7 +15,7 @@ int getSoilMoistureAnalog()
   return 1024-analogRead(IN_SOIL_MOISTURE);
 }
 
-float getSoilMoisture()
+uint8_t getSoilMoisture()
 {
   // sensor in air: 153
   // sensor in water: 650-870
