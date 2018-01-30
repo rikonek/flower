@@ -22,14 +22,14 @@
 #define OUT_PUMP 12
 #define OUT_BUZZER 13
 
-#define MAX_LOGS 36 // int
+#define MAX_LOGS 48 // int
 #define TIME_BETWEEN_READINGS 600000 // ms
 #define DISPLAY_RETURN_TIME 5000 // ms
 #define DISPLAY_BACKLIGHT_TIME 5000 // ms
-#define WATERING_DURATION 5000 // ms
+#define WATERING_DURATION 3500 // ms
 #define NO_WATER_ALARM_DURATION 5000 // ms
 
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG
   #define TIME_BETWEEN_READINGS 5000 // ms
