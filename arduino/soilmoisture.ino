@@ -27,11 +27,7 @@ uint8_t getSoilMoisture()
 
 soilMoistureStatus getSoilMoistureStatus()
 {
-  // dry:   0 < value < 300
-  // humid: 300 < value < 700
-  // water: value > 700
-
-  if(getSoilMoistureAnalog()>=300)
+  if(getSoilMoisture()>40)
   {
     return humid;
   }
