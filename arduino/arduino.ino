@@ -46,6 +46,7 @@
 #define LCD_D7 7
 #define LCD_BACKLIGHT_PIN 3
 #define LCD_BACKLIGHT_POL POSITIVE
+#define SERIAL_BAUD_RATES 9600
 
 typedef enum soilMoistureStatus
 {
@@ -84,7 +85,7 @@ void setup()
   noWaterAlarmBuzzerOff();
 
   #if DEBUG
-    Serial.begin(9600);
+    Serial.begin(SERIAL_BAUD_RATES);
     Serial.println("Flower project. Please wait...");
   #endif
 
