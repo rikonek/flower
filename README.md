@@ -14,10 +14,6 @@ Automatic plant care project
 * praca w środowisku domowym
 * Arduino
 
-### Funkcjonalności rozwojowe
-* monitorowanie poziomu wody w zbiorniku
-* podlewanie według wilgotności gleby, z uwzględnieniem czujnika zmierzchowego
-
 ## Items
 * 1x - Arduino Uno
 * 1x - 1602A - LCD module
