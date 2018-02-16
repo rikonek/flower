@@ -27,7 +27,7 @@ uint8_t getSoilMoisture()
 
 soilMoistureStatus getSoilMoistureStatus()
 {
-  if(getSoilMoisture()>40)
+  if(getSoilMoisture()>=HUMID_LEVEL)
   {
     return humid;
   }
