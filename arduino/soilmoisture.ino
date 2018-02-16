@@ -20,7 +20,9 @@ uint8_t getSoilMoisture()
   // sensor in air: 153-159
   // sensor in water: 650-870
 
-  uint8_t soil_moisture=map((getSoilMoistureAnalog()),160,850,0,100);
+  int sm_analog=getSoilMoistureAnalog();
+  if(sm_analog<160) sm_analog=160; // fix for map function (set sm_analog as minimum of map)
+  uint8_t soil_moisture=map((sm_analog),160,850,0,100);
   if(soil_moisture>100) soil_moisture=100;
   return soil_moisture;
 }
