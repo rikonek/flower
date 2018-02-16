@@ -25,6 +25,7 @@
 #define DISPLAY_BACKLIGHT_TIME 5000 // ms
 #define WATERING_DURATION 3500 // ms
 #define NO_WATER_ALARM_DURATION 5000 // ms
+#define HUMID_LEVEL 30 // percent
 
 #define DEBUG 0
 
